@@ -6,29 +6,49 @@
 package ec.edu.patronProxy;
 
 import ec.edu.ups.modelo.AbstractBanco;
+import ec.edu.ups.modelo.BancoPichincha;
+import java.util.Scanner;
 
 /**
  *
  * @author ariel
  */
-public class BancoProxy {
-    
+public class BancoProxy extends AbstractBanco {
+
+    Scanner leer = new Scanner(System.in);
+
     AbstractBanco banco;
 
-    public BancoProxy(AbstractBanco banco) {
-        this.banco = banco;
+    public BancoProxy() {
+        this.banco = new BancoPichincha();
     }
-    
-    public void mostrarSaldo() {
-        banco.mostrarDineroActual();
+
+    public boolean validar() {
+        System.out.print("Ingrese la contraseña:  -> ");
+        var contraseña = leer.next();
+        return contraseña.equals("12345");
     }
-    
-    public void depositar(double deposito) {
+
+    @Override
+    public void mostrarDineroActual() {
+        if (validar()) {
+            banco.mostrarDineroActual();
+        } else {
+            System.out.println("Contraseña incorrecta");
+        }
+    }
+
+    @Override
+    public void depositarDinero(double deposito) {
         banco.depositarDinero(deposito);
     }
-    
-    public void retirar(double retiro) {
-        banco.retirarDinero(retiro);
+
+    @Override
+    public void retirarDinero(double retiro) {
+        if (banco.getSaldo() >= retiro) {
+            banco.retirarDinero(retiro);
+        } else {
+            System.out.println("------SALDO INSUFICIENTE------");
+        }
     }
-    
 }

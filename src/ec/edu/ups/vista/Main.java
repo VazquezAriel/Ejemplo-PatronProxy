@@ -6,8 +6,6 @@
 package ec.edu.ups.vista;
 
 import ec.edu.patronProxy.BancoProxy;
-import ec.edu.ups.modelo.BancoPacifico;
-import ec.edu.ups.modelo.BancoPichincha;
 
 /**
  *
@@ -17,15 +15,10 @@ public class Main {
     
     public static void main(String[] args) {
         
-        BancoProxy bancoProxy = new BancoProxy(new BancoPacifico());
-        bancoProxy.depositar(250.6);
-        bancoProxy.mostrarSaldo();
-        bancoProxy.retirar(100);
-        
-        BancoProxy bancoProxy2 = new BancoProxy(new BancoPichincha());
-        bancoProxy2.depositar(2.6);
-        bancoProxy2.mostrarSaldo();
-        bancoProxy2.retirar(0.3);
+        BancoProxy bancoProxy = new BancoProxy();
+        bancoProxy.mostrarDineroActual();
+        bancoProxy.depositarDinero(500.26);
+        bancoProxy.retirarDinero(463.12);
         
     }
     
